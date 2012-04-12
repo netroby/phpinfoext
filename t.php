@@ -49,20 +49,30 @@ if (isset($_GET['act']) && 'functions' === $_GET['act']) {
 	}
 	// set a test value
 	$redis->setex('testkey', 720, 'i am value');
-	$all_keys = $redis->keys('*');
 	echo '<h2><a href="' . $_SERVER['SCRIPT_NAME'] . '?act=redis&do=clear">清空所有缓存</a></h2>';
 	echo '<h2>Redis Info</h2>';
 	$info = $redis->info();
 	echo '<table border="1">';
-	foreach ($info as $k => $v) 
+	$db_idx = array();
+	foreach ($info as $k => $v)  {
 		echo '<tr><td>' . $k . "</td><td>" . $v . "</td></tr>";
+		if (preg_match("/db(\d+)/is", $k, $m)) {
+			$db_idx[] = $m[1];
+		}
+	}
 	echo '</table>';
 
-	echo '<h2>所有的缓存内容</h2>';
+	
+
+	foreach ($db_idx as $idx) {
+	$redis->select($idx);
+	$all_keys = $redis->keys('*');
+	echo "<h2>数据库{$idx}缓存内容</h2>";
 	echo '<table border="1">';
 	foreach ($all_keys as $v) 
 		echo '<tr><td>' . $v . "</td><td>" . $redis->get($v) . "</td></tr>";
 	echo '</table>';
+	}
 }
 ?>
 	</body>

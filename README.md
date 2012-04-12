@@ -12,3 +12,5 @@ PHP扩展信息查看
 4. 可以查看PHPINFO
 
 5. 可以查看redis 的状态
+ 
+6. 可以察看redis数据
