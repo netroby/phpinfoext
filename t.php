@@ -9,24 +9,53 @@
 	</head>
 	<body>
 		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=functions">PHP内置函数</a> |
-		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=zostatus">Zend Optimizer运行状态</a>  |
+		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=ocstatus">opcache运行状态</a>  |
 		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=apcstatus">APC运行状态</a>  |
 		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=info">PHP info</a> |
-		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=redis">Redis info</a> 
+		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=memcache">Memcached</a> |
+		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=redis">Redis</a> 
+  
 <?php
-if (isset($_GET['act']) && 'functions' === $_GET['act']) {
+if (isset($_GET['act'])) {
+	switch ($_GET['act']) {
+	case 'functions':
+		act_functions();
+		break;
+	case 'ocstatus':
+		act_ocstatus();
+		break;
+	case 'apcstatus':
+		act_apcstatus();
+		break;
+	case 'info':
+		act_info();
+		break;
+	case 'memcache':
+		act_memcache();
+		break;
+	case 'redis':
+		act_redis();
+		break;
+	default:
+		act_home();
+		break;
+	}
+}
+function act_functions()  {
 	echo '<pre>';
 	print_r(get_defined_functions());
 	echo '</pre>';
-} else if (isset($_GET['act']) && 'zostatus' === $_GET['act']) {
+} 
+function act_ocstatus() {
 	echo '<pre>';
-	if (function_exists('accelerator_get_status')) {
-	    print_r(accelerator_get_status());
+	if (function_exists('opcache_get_status')) {
+	    print_r(opcache_get_status());
 	} else {
 		echo '系统没有安装Zend optimizer';
 	}
 	echo '</pre>';
-} else if (isset($_GET['act']) && 'apcstatus' === $_GET['act']) {
+} 
+function act_apcstatus() {
 	echo '<pre>';
 	if (function_exists('apc_cache_info')) {
 		echo '<h2>系统缓存</h2>';
@@ -37,9 +66,26 @@ if (isset($_GET['act']) && 'functions' === $_GET['act']) {
 		echo '系统没有安装APC';
 	}
 	echo '</pre>';
-} else if (isset($_GET['act']) && 'info' === $_GET['act']) {
+} 
+function act_memcache() {
+	echo '<pre>';
+	$m = new Memcached();
+	$m->addServer('127.0.0.1', 11211); 
+	$a = $m->getAllKeys();
+    print_r($a);
+	if (is_array($a)) {
+	foreach ($a as $k)
+		echo "\n\n".$k.":".var_export($m->get($k), TRUE);
+	    echo "\n\n";
+	}
+	$s = $m->getStats();
+	print_r($s);
+	echo '</pre>';
+}
+function act_info() {
 	phpinfo();
-} else if (isset($_GET['act']) && 'redis' === $_GET['act']) {
+} 
+function act_redis() {
 	$redis  = new Redis();
 	$redis->connect('127.0.0.1', 6379);
 	if (isset($_GET['do']) && 'clear' === $_GET['do']) {
