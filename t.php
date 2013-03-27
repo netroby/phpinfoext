@@ -69,6 +69,8 @@ function act_apcstatus() {
 } 
 function act_memcache() {
 	echo '<pre>';
+	if (!class_exists('Memcached'))
+		exit('Memcached扩展没有安装');
 	$m = new Memcached();
 	$m->addServer('127.0.0.1', 11211); 
 	$a = $m->getAllKeys();
