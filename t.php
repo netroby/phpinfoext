@@ -88,6 +88,8 @@ function act_info() {
 	phpinfo();
 } 
 function act_redis() {
+    if (!class_exists('Redis'))
+        exit('Redis not exists');
 	$redis  = new Redis();
 	$redis->connect('127.0.0.1', 6379);
 	if (isset($_GET['do']) && 'clear' === $_GET['do']) {
