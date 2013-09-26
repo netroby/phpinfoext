@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset=GBK>
-		<title>µ÷ÊÔĞÅÏ¢</title>
+		<meta charset=UTF-8>
+		<title>è°ƒè¯•ä¿¡æ¯</title>
 		<style>
 			body, pre {font-size:10pt}
 		</style>
 	</head>
 	<body>
-		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=functions">PHPÄÚÖÃº¯Êı</a> |
-		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=ocstatus">opcacheÔËĞĞ×´Ì¬</a>  |
-		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=apcstatus">APCÔËĞĞ×´Ì¬</a>  |
+		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=functions">PHPå†…ç½®å‡½æ•°</a> |
+		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=ocstatus">opcacheè¿è¡ŒçŠ¶æ€</a>  |
+		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=apcstatus">APCè¿è¡ŒçŠ¶æ€</a>  |
 		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=info">PHP info</a> |
 		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=memcache">Memcached</a> |
 		<a href="<?=$_SERVER['SCRIPT_NAME'];?>?act=redis">Redis</a> 
@@ -51,26 +51,26 @@ function act_ocstatus() {
 	if (function_exists('opcache_get_status')) {
 	    print_r(opcache_get_status());
 	} else {
-		echo 'ÏµÍ³Ã»ÓĞ°²×°Zend optimizer';
+		echo 'ç³»ç»Ÿæ²¡æœ‰å®‰è£…Zend optimizer';
 	}
 	echo '</pre>';
 } 
 function act_apcstatus() {
 	echo '<pre>';
 	if (function_exists('apc_cache_info')) {
-		echo '<h2>ÏµÍ³»º´æ</h2>';
+		echo '<h2>ç³»ç»Ÿç¼“å­˜</h2>';
 	    print_r(apc_cache_info());
-		echo '<h2>ÓÃ»§»º´æ</h2>';
+		echo '<h2>ç”¨æˆ·ç¼“å­˜</h2>';
 		print_r(apc_cache_info('user'));
 	} else {
-		echo 'ÏµÍ³Ã»ÓĞ°²×°APC';
+		echo 'ç³»ç»Ÿæ²¡æœ‰å®‰è£…APC';
 	}
 	echo '</pre>';
 } 
 function act_memcache() {
 	echo '<pre>';
 	if (!class_exists('Memcached'))
-		exit('MemcachedÀ©Õ¹Ã»ÓĞ°²×°');
+		exit('Memcachedæ‰©å±•æ²¡æœ‰å®‰è£…');
 	$m = new Memcached();
 	$m->addServer('127.0.0.1', 11211); 
 	$a = $m->getAllKeys();
@@ -88,6 +88,8 @@ function act_info() {
 	phpinfo();
 } 
 function act_redis() {
+    if (!class_exists('Redis'))
+        exit('Redis not exists');
 	$redis  = new Redis();
 	$redis->connect('127.0.0.1', 6379);
 	if (isset($_GET['do']) && 'clear' === $_GET['do']) {
@@ -97,7 +99,7 @@ function act_redis() {
 	}
 	// set a test value
 	$redis->setex('testkey', 720, 'i am value');
-	echo '<h2><a href="' . $_SERVER['SCRIPT_NAME'] . '?act=redis&do=clear">Çå¿ÕËùÓĞ»º´æ</a></h2>';
+	echo '<h2><a href="' . $_SERVER['SCRIPT_NAME'] . '?act=redis&do=clear">æ¸…ç©ºæ‰€æœ‰ç¼“å­˜</a></h2>';
 	echo '<h2>Redis Info</h2>';
 	$info = $redis->info();
 	echo '<table border="1">';
@@ -109,13 +111,12 @@ function act_redis() {
 		}
 	}
 	echo '</table>';
-
 	
 
 	foreach ($db_idx as $idx) {
 	$redis->select($idx);
 	$all_keys = $redis->keys('*');
-	echo "<h2>Êı¾İ¿â{$idx}»º´æÄÚÈİ</h2>";
+	echo "<h2>æ•°æ®åº“{$idx}ç¼“å­˜å†…å®¹</h2>";
 	echo '<table border="1">';
 	foreach ($all_keys as $v) 
 		echo '<tr><td>' . $v . "</td><td>" . $redis->get($v) . "</td></tr>";
