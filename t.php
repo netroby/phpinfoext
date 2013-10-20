@@ -84,6 +84,8 @@ if (isset($_GET['act'])) {
             act_home();
             break;
     }
+} else {
+    act_home();
 }
 
 function act_home() {
