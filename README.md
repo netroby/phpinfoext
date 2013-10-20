@@ -1,27 +1,25 @@
-PHP扩展信息查看
-==============
+php info extensive
+==================
 
-# 项目简介
+Introduction
+-------------
 
-这个项目主要是为了方便自己在开发的过程中，比较快速的查看PHP相关信息。
+This tools can help you view php info details.
 
-1. 可以查看PHP所有的函数
+1. PHP functions
+2. Loaded extensions
+3. Zend OPCache
+4. phpinfo
+5. memcached
+6. redis
 
-2. 可以查看Zend Optimzer的缓存状态
+Installation
+------------
+````
+git clone https://github.com/ancientrock/phpinfoext.git
+````
 
-3. 可以查看APC的状态
+Access url: http://domain.com/phpinfoext/t.php
 
-4. 可以查看PHPINFO
-
-5. 可以查看redis 的状态
- 
-6. 可以察看redis数据
-
-# 使用说明
-
-上传t.php到任意目录下面，或者git clone https://github.com/ancientrock/phpinfoext.git
-
-访问 http://domain.com/phpinfoext/t.php 即可
-
-domain.com替换为您自己的域名
+Replace the url to your real path.
 
