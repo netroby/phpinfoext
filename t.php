@@ -85,6 +85,13 @@ if (isset($_GET['act'])) {
             break;
     }
 }
+
+function act_home() {
+    echo '<p>';
+    echo 'Click links above to see detail! Folk me on github: <a href="https://github.com/ancientrock/phpinfoext">https://github.com/ancientrock/phpinfoext</a>';
+    echo '</p>';
+}
+
 function act_extensions()
 {
     echo '<pre>';
