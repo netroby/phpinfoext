@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset=UTF-8>
-    <title>调试信息</title>
+    <title>PHP info extensive</title>
     <style>
         body, pre {
             font-size: 10pt
@@ -72,9 +72,6 @@ if (isset($_GET['act'])) {
         case 'ocstatus':
             act_ocstatus();
             break;
-        case 'apcstatus':
-            act_apcstatus();
-            break;
         case 'info':
             act_info();
             break;
@@ -109,21 +106,7 @@ function act_ocstatus()
     if (function_exists('opcache_get_status')) {
         print_r(opcache_get_status());
     } else {
-        echo '系统没有安装Zend optimizer';
-    }
-    echo '</pre>';
-}
-
-function act_apcstatus()
-{
-    echo '<pre>';
-    if (function_exists('apc_cache_info')) {
-        echo '<h2>系统缓存</h2>';
-        print_r(apc_cache_info());
-        echo '<h2>用户缓存</h2>';
-        print_r(apc_cache_info('user'));
-    } else {
-        echo '系统没有安装APC';
+        echo 'OPCache not loaded';
     }
     echo '</pre>';
 }
@@ -132,7 +115,7 @@ function act_memcache()
 {
     echo '<pre>';
     if (!class_exists('Memcached'))
-        exit('Memcached扩展没有安装');
+        exit('Memcached not loaded');
     $m = new Memcached();
     $m->addServer('127.0.0.1', 11211);
     $a = $m->getAllKeys();
@@ -167,7 +150,7 @@ function act_redis()
     }
     // set a test value
     $redis->setex('testkey', 720, 'i am value');
-    echo '<h2><a href="' . $_SERVER['SCRIPT_NAME'] . '?act=redis&do=clear">清空所有缓存</a></h2>';
+    echo '<h2><a href="' . $_SERVER['SCRIPT_NAME'] . '?act=redis&do=clear">fluch all redis cache</a></h2>';
     echo '<h2>Redis Info</h2>';
     $info = $redis->info();
     echo '<table border="1">';
@@ -184,7 +167,7 @@ function act_redis()
     foreach ($db_idx as $idx) {
         $redis->select($idx);
         $all_keys = $redis->keys('*');
-        echo "<h2>数据库{$idx}缓存内容</h2>";
+        echo "<h2>Database{$idx} Caches:</h2>";
         echo '<table border="1">';
         foreach ($all_keys as $v)
             echo '<tr><td>' . $v . "</td><td>" . $redis->get($v) . "</td></tr>";
