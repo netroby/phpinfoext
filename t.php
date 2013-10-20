@@ -7,15 +7,58 @@
         body, pre {
             font-size: 10pt
         }
+
+        .main-menu li {
+            width: 100px;
+            float: left;
+            list-style: none;
+            margin: 2px;
+            border: #CCC 1px solid;
+        }
+
+        .main-menu li > a {
+            padding: 5px 10px;
+            display: block;
+            background-color: #EEE;
+        }
+
+        .main-menu li > a:hover {
+            color: #FFF;
+            background-color: #019;
+        }
+
+        .clearfix:after {
+            content: ".";
+            display: block;
+            clear: both;
+            visibility: hidden;
+            line-height: 0;
+            height: 0;
+        }
+
+        .clearfix {
+            display: inline-block;
+        }
+
+        html[xmlns] .clearfix {
+            display: block;
+        }
+
+        * html .clearfix {
+            height: 1%;
+        }
     </style>
 </head>
 <body>
-<a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=extensions">Extensions</a>
-<a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=functions">Functions</a> |
-<a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=ocstatus">OPCache</a> |
-<a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=info">PHP info</a> |
-<a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=memcache">Memcached</a> |
-<a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=redis">Redis</a>
+<ul class="main-menu">
+    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=extensions">Extensions</a></li>
+    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=functions">Functions</a></li>
+    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=ocstatus">OPCache</a></li>
+    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=info">PHP info</a></li>
+    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=memcache">Memcached</a></li>
+    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=redis">Redis</a></li>
+</ul>
+<div class="clearfix"></div>
 
 <?php
 if (isset($_GET['act'])) {
@@ -52,6 +95,7 @@ function act_extensions()
     print_r(get_loaded_extensions());
     echo '</pre>';
 }
+
 function act_functions()
 {
     echo '<pre>';
