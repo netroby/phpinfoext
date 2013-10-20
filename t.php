@@ -37,7 +37,7 @@
         }
 
         .clearfix {
-            display: inline-block;
+            width:100%;
         }
 
         html[xmlns] .clearfix {
@@ -59,7 +59,6 @@
     <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=redis">Redis</a></li>
 </ul>
 <div class="clearfix"></div>
-
 <?php
 if (isset($_GET['act'])) {
     switch ($_GET['act']) {
@@ -89,14 +88,29 @@ if (isset($_GET['act'])) {
 function act_extensions()
 {
     echo '<pre>';
-    print_r(get_loaded_extensions());
+    foreach (get_loaded_extensions() as $k => $v) {
+        $j = $k+1;
+        echo $j . ".\t<a href=\"http://php.net/" . $v . "\">" . $v . "</a>\n";
+    }
     echo '</pre>';
 }
 
 function act_functions()
 {
     echo '<pre>';
-    print_r(get_defined_functions());
+    foreach (get_defined_functions() as $k => $v) {
+        echo $k ." => <pre>";
+        if (is_array($v)) {
+            foreach ($v as $ck => $cv) {
+                $k = $ck+1;
+                echo $k . ".\t<a href=\"http://php.net/" . $cv . "\">" . $cv . "</a>\n";
+            }
+        } else {
+
+            echo   "\t<a href=\"http://php.net/" . $v . "\">" . $v . "</a>\n";
+        }
+        echo "</pre>";
+    }
     echo '</pre>';
 }
 
