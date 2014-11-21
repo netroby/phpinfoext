@@ -16,12 +16,13 @@ This tools can help you view php info details.
 Installation
 ------------
 ````
-git clone https://github.com/ancientrock/phpinfoext.git
+git clone https://github.com/netroby/phpinfoext.git
 ````
+put file into your web root .
 
 Access url: http://domain.com/phpinfoext/t.php
 
-Replace the url to your real path.
+Remember replace the url to your real path.
 
 Warning
 -------------
@@ -35,4 +36,7 @@ License
 
 This project is under MIT license.
 
-See http://www.ancientrocklab.com/license.txt
+Author
+-------------
+
+ZhiFeng Hu [netroby]
