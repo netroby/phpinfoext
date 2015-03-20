@@ -4,49 +4,14 @@
     <meta charset=UTF-8>
     <title>PHP info extensive</title>
     <style>
-        body, pre {
-            font-size: 10pt
-        }
-
-        .main-menu li {
-            width: 100px;
-            float: left;
-            list-style: none;
-            margin: 2px;
-            border: #CCC 1px solid;
-        }
-
-        .main-menu li > a {
-            padding: 5px 10px;
-            display: block;
-            background-color: #EEE;
-        }
-
-        .main-menu li > a:hover {
-            color: #FFF;
-            background-color: #019;
-        }
-
-        .clearfix:after {
-            content: ".";
-            display: block;
-            clear: both;
-            visibility: hidden;
-            line-height: 0;
-            height: 0;
-        }
-
-        .clearfix {
-            width:100%;
-        }
-
-        html[xmlns] .clearfix {
-            display: block;
-        }
-
-        * html .clearfix {
-            height: 1%;
-        }
+        body, pre {font-size: 10pt}
+        .main-menu li {width: 100px;float: left;list-style: none;margin: 2px;border: #CCC 1px solid;}
+        .main-menu li > a {padding: 5px 10px;display: block; background-color: #EEE; }
+        .main-menu li > a:hover {color: #FFF;background-color: #019;}
+        .clearfix:after {content: ".";display: block;clear: both;visibility: hidden;line-height: 0;height: 0;}
+        .clearfix {width:100%;}
+        html[xmlns] .clearfix {display: block;}
+        * html .clearfix {height: 1%;}
     </style>
 </head>
 <body>
@@ -62,27 +27,27 @@
 <?php
 if (isset($_GET['act'])) {
     switch ($_GET['act']) {
-        case 'extensions':
-            act_extensions();
-            break;
-        case 'functions':
-            act_functions();
-            break;
-        case 'ocstatus':
-            act_ocstatus();
-            break;
-        case 'info':
-            act_info();
-            break;
-        case 'memcache':
-            act_memcache();
-            break;
-        case 'redis':
-            act_redis();
-            break;
-        default:
-            act_home();
-            break;
+    case 'extensions':
+        act_extensions();
+        break;
+    case 'functions':
+        act_functions();
+        break;
+    case 'ocstatus':
+        act_ocstatus();
+        break;
+    case 'info':
+        act_info();
+        break;
+    case 'memcache':
+        act_memcache();
+        break;
+    case 'redis':
+        act_redis();
+        break;
+    default:
+        act_home();
+        break;
     }
 } else {
     act_home();
