@@ -55,7 +55,8 @@ if (isset($_GET['act'])) {
 
 function act_home() {
     echo '<p>';
-    echo 'Click links above to see detail! Folk me on github: <a href="https://github.com/ancientrock/phpinfoext">https://github.com/ancientrock/phpinfoext</a>';
+    echo 'Click links above to see detail! Folk me on github: <a href="https://github.com/netroby/phpinfoext">https://github.com/netroby/phpinfoext</a>';
+    echo 'Powered by netroby <a href="https://twitter.com/netroby">@twitter</a> <a href="http://weibo.com/netroby">@weibo</a>';
     echo '</p>';
 }
 
