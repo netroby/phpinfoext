@@ -1,8 +1,8 @@
-php info extensive
-==================
+# php info extensive
 
-Introduction
--------------
+
+## Introduction
+
 
 This tools can help you view php info details.
 
@@ -12,9 +12,14 @@ This tools can help you view php info details.
 4. phpinfo
 5. memcached
 6. redis
+7. 
 
-Installation
-------------
+## Requirement
+
+1. PHP 5.4+
+
+## Installation
+
 ````
 git clone https://github.com/netroby/phpinfoext.git
 ````
@@ -24,19 +29,16 @@ Access url: http://domain.com/phpinfoext/t.php
 
 Remember replace the url to your real path.
 
-Warning
--------------
+# Warning
 
 This file need phpinfo() function be opened, and take care for security reason.
 
 Do not put it directly on production environment.
 
-License
---------------
+# License
 
 This project is under MIT license.
 
-Author
--------------
+# Author
 
 ZhiFeng Hu [netroby]
