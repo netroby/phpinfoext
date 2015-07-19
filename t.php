@@ -1,3 +1,6 @@
+<?php
+$base_url = $_SERVER['SCRIPT_NAME'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,12 +19,12 @@
 </head>
 <body>
 <ul class="main-menu">
-    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=extensions">Extensions</a></li>
-    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=functions">Functions</a></li>
-    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=ocstatus">OPCache</a></li>
-    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=info">PHP info</a></li>
-    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=memcache">Memcached</a></li>
-    <li><a href="<?= $_SERVER['SCRIPT_NAME']; ?>?act=redis">Redis</a></li>
+    <li><a href="<?=$base_url;?>?act=extensions">Extensions</a></li>
+    <li><a href="<?=$base_url;?>?act=functions">Functions</a></li>
+    <li><a href="<?=$base_url;?>?act=ocstatus">OPCache</a></li>
+    <li><a href="<?=$base_url;?>?act=info">PHP info</a></li>
+    <li><a href="<?=$base_url;?>?act=memcache">Memcached</a></li>
+    <li><a href="<?=$base_url;?>?act=redis">Redis</a></li>
 </ul>
 <div class="clearfix"></div>
 <?php
@@ -110,8 +113,9 @@ function act_memcache()
     $a = $m->getAllKeys();
     print_r($a);
     if (is_array($a)) {
-        foreach ($a as $k)
+        foreach ($a as $k) {
             echo "\n\n" . $k . ":" . var_export($m->get($k), TRUE);
+        }
         echo "\n\n";
     }
     $s = $m->getStats();
@@ -128,8 +132,9 @@ function act_info()
 
 function act_redis()
 {
-    if (!class_exists('Redis'))
+    if (!class_exists('Redis')) {
         exit('<p>Redis not exists</p>');
+    }
     $redis = new Redis();
     $redis->connect('127.0.0.1', 6379);
     if (isset($_GET['do']) && 'clear' === $_GET['do']) {

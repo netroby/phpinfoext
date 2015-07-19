@@ -1,4 +1,4 @@
-# php info extensive
+# php info extensive viewer
 
 
 ## Introduction
@@ -12,7 +12,6 @@ This tools can help you view php info details.
 4. phpinfo
 5. memcached
 6. redis
-7. 
 
 ## Requirement
 
@@ -23,7 +22,7 @@ This tools can help you view php info details.
 ````
 git clone https://github.com/netroby/phpinfoext.git
 ````
-put file into your web root .
+Make sure phpinfoext directory can execute php 
 
 Access url: http://domain.com/phpinfoext/t.php
 
