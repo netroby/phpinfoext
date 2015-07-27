@@ -7,7 +7,7 @@ $base_url = $_SERVER['SCRIPT_NAME'];
     <meta charset=UTF-8>
     <title>PHP info extensive</title>
     <style>
-        body, pre {font-size: 10pt}
+        body, pre {font-size: 12px}
         .main-menu li {width: 100px;float: left;list-style: none;margin: 2px;border: #CCC 1px solid;}
         .main-menu li > a {padding: 5px 10px;display: block; background-color: #EEE; }
         .main-menu li > a:hover {color: #FFF;background-color: #019;}
@@ -67,8 +67,7 @@ function act_extensions()
 {
     echo '<pre>';
     foreach (get_loaded_extensions() as $k => $v) {
-        $j = $k+1;
-        echo $j . ".\t<a href=\"http://php.net/" . $v . "\">" . $v . "</a>\n";
+        echo ($k+1) . ".\t<a href=\"http://php.net/" . $v . "\">" . $v . "</a>" . PHP_EOL;
     }
     echo '</pre>';
 }
