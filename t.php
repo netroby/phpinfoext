@@ -80,11 +80,10 @@ function act_functions()
         if (is_array($v)) {
             foreach ($v as $ck => $cv) {
                 $k = $ck+1;
-                echo $k . ".\t<a href=\"http://php.net/" . $cv . "\">" . $cv . "</a>\n";
+                echo $k . ".\t<a href=\"http://php.net/" . $cv . "\">" . $cv . "</a>" . PHP_EOL;
             }
         } else {
-
-            echo   "\t<a href=\"http://php.net/" . $v . "\">" . $v . "</a>\n";
+            echo   "\t<a href=\"http://php.net/" . $v . "\">" . $v . "</a>" . PHP_EOL;
         }
         echo "</pre>";
     }
